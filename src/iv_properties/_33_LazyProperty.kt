@@ -1,9 +1,20 @@
 package iv_properties
 
+import syntax.qualifiedThis.labelsForExtensionFunctionLiterals
 import util.TODO
 
 class LazyProperty(val initializer: () -> Int) {
-    val lazy: Int = todoTask33()
+    private var initialized: Boolean = false
+    private var lazyValue: Int = 0
+    val lazy: Int
+        get() {
+            if (initialized == false) {
+                initialized = true
+                lazyValue = initializer()
+                return lazyValue
+            } else
+                return lazyValue
+        }
 }
 
 fun todoTask33(): Nothing = TODO(
